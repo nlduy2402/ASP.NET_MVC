@@ -45,11 +45,28 @@ namespace Demo.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
-        {
+        // Form login GET
+		public IActionResult Login()
+		{
             return View();
         }
+        //Form login POST: bat su kien login va nhan data
+        [HttpPost]
+        public IActionResult Login(string usrname, string password)
+        {
+            var user = _context.User.Where(usr => usr.Email == usrname  && usr.Password == password ).FirstOrDefault<User>();
+            if (user == null || _context.User == null)
+            {
+                return NotFound();
+            }
+            return View();
+        }
+
+        // GET: Users/Create
+        public IActionResult Create()
+         {
+             return View();
+         }
 
         // POST: Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
