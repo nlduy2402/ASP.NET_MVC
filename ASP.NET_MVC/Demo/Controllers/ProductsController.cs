@@ -22,12 +22,18 @@ namespace Demo.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var demoContext = _context.Product.Include(p => p.category);
+            var demoContext = _context?.Product?.Include(p => p.category);
             return View(await demoContext.ToListAsync());
         }
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpPost]
+		public async Task<IActionResult> Index(int catid, string keyword)
+		{
+			var demoContext = _context?.Product?.Include(p => p.category).Where(p => p.Name.Contains(keyword) && p.CategoryId==catid);
+			return View(await demoContext.ToListAsync());
+		}
+		// GET: Products/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Product == null)
             {
