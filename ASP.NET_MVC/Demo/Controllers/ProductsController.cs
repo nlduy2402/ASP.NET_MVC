@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Demo.Data;
 using Demo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Demo.Controllers
 {
@@ -52,6 +53,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles ="ADMIN")]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
@@ -76,6 +78,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Product == null)
@@ -129,6 +132,7 @@ namespace Demo.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Product == null)
