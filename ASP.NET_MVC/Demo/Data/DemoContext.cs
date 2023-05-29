@@ -14,6 +14,7 @@ namespace Demo.Data
         {
         }
 
+        // khởi tạo Category có thể null
         public DbSet<Demo.Models.Category> Category { get; set; } = default!;
 
         public DbSet<Demo.Models.Product>? Product { get; set; }

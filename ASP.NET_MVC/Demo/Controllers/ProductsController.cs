@@ -23,6 +23,7 @@ namespace Demo.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            
             var demoContext = _context?.Product?.Include(p => p.category);
             return View(await demoContext.ToListAsync());
         }
@@ -57,6 +58,8 @@ namespace Demo.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
+            int b = ViewData.Count();
+            
             return View();
         }
 
